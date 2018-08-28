@@ -7,4 +7,5 @@ UWP背景毛玻璃效果
 AcrylicBrush.InitializeFrostedGlass(UIElement glassHost);
 ```
 glassHost：内层Grid对象的名称(x:Name)
-此方法要在InitializeComponent()之后添加
+
+注意：此方法要在InitializeComponent()之后添加
