@@ -1,29 +1,9 @@
 # AcrylicBrushReference
 UWP背景毛玻璃效果
 
+初始化亚克力效果,需要在XAML的外层Grid中添加Span所有网格的内层Grid
+并在页面初始化的方法中InitializeComponent()之后添加
 ```c#
-public static class AcrylicBrush
-{
-    /// <summary>
-    ///初始化亚克力效果
-    ///需要在XAML的外层Grid中添加Span所有网格的内层Grid
-    /// </summary>
-    /// <param name="glassHost">内层Grid对象的名称</param>
-    public static void InitializeFrostedGlass(UIElement glassHost)
-    {
-        Visual hostVisual = ElementCompositionPreview.GetElementVisual(glassHost);
-        Compositor compositor = hostVisual.Compositor;
-        var backdropBrush = compositor.CreateHostBackdropBrush();
-        var glassVisual = compositor.CreateSpriteVisual();
-        glassVisual.Brush = backdropBrush;
-        ElementCompositionPreview.SetElementChildVisual(glassHost, glassVisual);
-        var bindSizeAnimation = compositor.CreateExpressionAnimation("hostVisual.Size");
-        bindSizeAnimation.SetReferenceParameter("hostVisual", hostVisual);
-        glassVisual.StartAnimation("Size", bindSizeAnimation);
-        //界面扩展到标题栏
-        CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
-        var titlebar = ApplicationView.GetForCurrentView().TitleBar;
-        titlebar.ButtonBackgroundColor = Colors.Transparent;
-    }
-}
+AcrylicBrush.InitializeFrostedGlass(UIElement glassHost);
 ```
+glassHost：内层Grid对象的名称(x:Name)
